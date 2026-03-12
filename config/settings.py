@@ -1,6 +1,7 @@
 """
 Minimal Django settings for CI-CD-deploy-project.
 """
+
 import os
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "change-me-in-production")

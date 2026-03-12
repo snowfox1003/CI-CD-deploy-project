@@ -1,6 +1,5 @@
 """Minimal smoke tests so CI test job runs and passes."""
 
-import pytest
 from django.conf import settings
 
 

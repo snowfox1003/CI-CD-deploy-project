@@ -1,6 +1,7 @@
 """
 Test settings: use Postgres when DATABASE_URL is set (e.g. in CI).
 """
+
 import os
 
 from .settings import *  # noqa: F401, F403
