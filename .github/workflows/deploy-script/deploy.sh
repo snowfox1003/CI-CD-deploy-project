@@ -32,10 +32,10 @@ else
   git clone --branch "$BRANCH" "$REPO_URL" "$DEPLOY_DIR"
 fi
 
-if [[ ! -f "$DEPLOY_DIR/.env" ]]; then
-  log "ERROR: .env not found. Place .env manually in $DEPLOY_DIR before deploying."
-  exit 1
-fi
+# if [[ ! -f "$DEPLOY_DIR/.env" ]]; then
+#   log "ERROR: .env not found. Place .env manually in $DEPLOY_DIR before deploying."
+#   exit 1
+# fi
 
 cd "$DEPLOY_DIR"
 
