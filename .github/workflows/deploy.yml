@@ -35,7 +35,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          key_passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
+          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
           port: ${{ env.SSH_PORT }}
           envs: SCRIPT_URL,DEPLOY_SCRIPT_TOKEN,BRANCH,REPO_URL
           script: |
