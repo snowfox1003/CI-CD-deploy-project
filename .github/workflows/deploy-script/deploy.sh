@@ -39,11 +39,14 @@ fi
 
 cd "$DEPLOY_DIR"
 
-log "Stopping existing containers..."
-make down || true
+# log "Stopping existing containers..."
+# make down || true
 
-log "Building and starting stack..."
-make build
-make up
+# log "Building and starting stack..."
+# make build
+# make up
+
+printf 'This is test deploy. Test is successfully finished %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" > test.txt
+log "Wrote test.txt in $DEPLOY_DIR."
 
 log "Deploy completed."

@@ -18,13 +18,13 @@ jobs:
     if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    environment: ${{ github.event.workflow_run.head_branch == 'main' && 'production' || 'staging' }}
+    environment: ${{ github.event.workflow_run.head_branch == 'main' && 'production' || (github.event.workflow_run.head_branch == 'develop' && 'staging' || '')}}
     env:
       BRANCH: ${{ github.event.workflow_run.head_branch }}
-      SSH_HOST: ${{ github.event.workflow_run.head_branch == 'main' && secrets.PROD_SSH_HOST || secrets.DEV_SSH_HOST }}
-      SSH_USER: ${{ github.event.workflow_run.head_branch == 'main' && secrets.PROD_SSH_USER || secrets.DEV_SSH_USER }}
-      SSH_PRIVATE_KEY: ${{ github.event.workflow_run.head_branch == 'main' && secrets.PROD_SSH_PRIVATE_KEY || secrets.DEV_SSH_PRIVATE_KEY }}
-      SSH_PORT: ${{ github.event.workflow_run.head_branch == 'main' && secrets.PROD_SSH_PORT || secrets.DEV_SSH_PORT || 22 }}
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      SSH_PORT: ${{ secrets.SSH_PORT || 22 }}
       REPO_URL: https://github.com/${{ github.repository }}.git
       SCRIPT_URL: ${{ secrets.DEPLOY_SCRIPT_URL || format('https://raw.githubusercontent.com/{0}/{1}/.github/workflows/deploy-script/deploy.sh', github.repository, github.event.workflow_run.head_sha) }}
     steps:
