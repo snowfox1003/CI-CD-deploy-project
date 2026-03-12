@@ -18,8 +18,8 @@ if [[ -z "${REPO_URL:-}" || -z "${BRANCH:-}" ]]; then
   exit 1
 fi
 
-command -v git  >/dev/null 2>&1 || { log "ERROR: git is not installed.";  exit 1; }
-command -v make >/dev/null 2>&1 || { log "ERROR: make is not installed."; exit 1; }
+# command -v git  >/dev/null 2>&1 || { log "ERROR: git is not installed.";  exit 1; }
+# command -v make >/dev/null 2>&1 || { log "ERROR: make is not installed."; exit 1; }
 
 if [[ -d "$DEPLOY_DIR/.git" ]]; then
   log "Pulling latest in $DEPLOY_DIR..."
