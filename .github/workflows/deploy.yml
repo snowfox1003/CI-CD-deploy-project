@@ -39,12 +39,17 @@ jobs:
           port: ${{ env.SSH_PORT }}
           envs: SCRIPT_URL,DEPLOY_SCRIPT_TOKEN,BRANCH,REPO_URL
           script: |
+            set -euo pipefail
+            tmp_script="$(mktemp /tmp/deploy.XXXXXX.sh)"
+            trap 'rm -f "$tmp_script"' EXIT
             if [ -n "$DEPLOY_SCRIPT_TOKEN" ]; then
-              curl -sSL -f -H "Authorization: token $DEPLOY_SCRIPT_TOKEN" "$SCRIPT_URL" -o /tmp/deploy.sh
+              curl --silent --show-error --location --fail \
+                -H "Authorization: token $DEPLOY_SCRIPT_TOKEN" \
+                "$SCRIPT_URL" -o "$tmp_script"
             else
-              curl -sSL -f "$SCRIPT_URL" -o /tmp/deploy.sh
+              curl --silent --show-error --location --fail \
+                "$SCRIPT_URL" -o "$tmp_script"
             fi
-            bash /tmp/deploy.sh
-            exit_code=$?
+            bash "$tmp_script"
             rm -f /tmp/deploy.sh
             exit $exit_code
